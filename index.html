@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reflective Diagnostics Audits</title>
-  <meta name="description" content="Public-facing audit cases and benchmark experiments from Enlightened AI Research Lab." />
+  <meta name="description" content="Clear public examples of how AI models succeed, fail, stay stable, or break under pressure." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,13 +13,12 @@
       <div class="eyebrow">Enlightened AI Research Lab</div>
       <h1>Reflective Diagnostics Audits</h1>
       <p class="lead">
-        Public-facing audit cases and benchmark experiments for evaluating structural reliability,
-        uncertainty, confidence behavior, and failure modes in large language models.
+        Clear public examples of how different AI models answer, stay stable, drift, or fail under pressure.
       </p>
       <nav class="topnav">
         <a href="#about">About</a>
+        <a href="#system">System</a>
         <a href="#cases">Cases</a>
-        <a href="#method">Method</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -28,34 +27,76 @@
   <main>
     <section id="about" class="section">
       <div class="wrap">
-        <h2>What this is</h2>
+        <h2>What this site is</h2>
         <p>
-          Reflective Diagnostics is a modular audit framework for evaluating not only what a model outputs,
-          but how stable it remains, how well its claims are supported, how it behaves under pressure,
-          and how it fails on exact-answer tasks.
+          This site shows selected audit runs from Reflective Diagnostics.
         </p>
+        <p>
+          The goal is simple: not just to ask whether a model got the answer right, but to look at
+          <strong>how</strong> it answered.
+        </p>
+        <p>
+          Some models are wrong but sound very confident. Some get the answer right but lose structure.
+          Some stay stable across reruns. Others drift into different answers. This site highlights those differences.
+        </p>
+      </div>
+    </section>
+
+    <section id="system" class="section alt">
+      <div class="wrap">
+        <h2>What the system looks at</h2>
         <div class="grid two">
           <div class="card">
-            <h3>What it measures</h3>
+            <h3>Main questions</h3>
             <ul>
-              <li>Structural support and reasoning quality</li>
-              <li>Revision behavior and drift</li>
-              <li>Uncertainty and semantic fragmentation</li>
-              <li>Confidence versus evidence density</li>
-              <li>Constraint grounding and integrity</li>
-              <li>Boundary hold, snap, and recovery under pressure</li>
+              <li>Did the model stay consistent?</li>
+              <li>Did it support its claims?</li>
+              <li>Did revision improve the answer?</li>
+              <li>Did confidence match the evidence?</li>
+              <li>Did it hold up under pressure?</li>
+              <li>Did it fail carefully or hallucinate confidently?</li>
             </ul>
           </div>
           <div class="card">
-            <h3>Why it matters</h3>
+            <h3>Main parts</h3>
             <ul>
-              <li>Format-compliant but wrong</li>
-              <li>Correct but structurally unstable</li>
-              <li>High-confidence hallucination</li>
-              <li>Low-confidence failure</li>
-              <li>Semantic fragmentation across runs</li>
-              <li>Different failure styles hidden by ordinary benchmarks</li>
+              <li><strong>Probe</strong> — runs prompts across models</li>
+              <li><strong>Reasoning</strong> — checks support and structure</li>
+              <li><strong>Reflection</strong> — compares first and revised answers</li>
+              <li><strong>Uncertainty</strong> — checks rerun stability</li>
+              <li><strong>Epistemic Discipline</strong> — checks confidence versus support</li>
+              <li><strong>Integrity</strong> — checks task and constraint grounding</li>
+              <li><strong>Logprobs</strong> — checks generation instability</li>
+              <li><strong>Elasticity</strong> — tests hold, snap, or recovery under pressure</li>
+              <li><strong>Battery Runner</strong> — runs benchmark batches across models</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Benchmark families</h2>
+        <p>
+          The current benchmark families include:
+        </p>
+        <div class="grid two">
+          <div class="mini-card">
+            <h3>Mathematics</h3>
+            <p>Tests symbolic and multi-step computation.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Bioinformatics</h3>
+            <p>Tests long-sequence positional reasoning.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Cryptography</h3>
+            <p>Tests whether models admit limits or hallucinate impossible exact answers.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Graph Theory</h3>
+            <p>Tests relational working memory and shortest-path reasoning.</p>
           </div>
         </div>
       </div>
@@ -63,41 +104,28 @@
 
     <section id="cases" class="section alt">
       <div class="wrap">
-        <h2>Featured Audit Case</h2>
+        <h2>Featured audit case</h2>
         <div class="case-card">
           <div class="case-meta">L15 Diagnostic Run 002 · 2026-03-10</div>
-          <h3>Graph Theory Oracle — Relational Working Memory Under Adversarial Load</h3>
+          <h3>Graph Theory Oracle</h3>
           <p>
-            Five frontier models were evaluated on adversarial shortest-path graph tasks designed to
-            separate relational accuracy, format retention, and epistemic posture.
+            A graph reasoning stress test showing how frontier models differ in accuracy, format stability,
+            and confidence when solving dense shortest-path tasks.
           </p>
           <a class="button" href="run-002-graph-theory.html">Open case page</a>
         </div>
       </div>
     </section>
 
-    <section id="method" class="section">
+    <section class="section">
       <div class="wrap">
-        <h2>Method summary</h2>
+        <h2>What is included here</h2>
         <p>
-          This public site presents curated findings only. It does not expose raw internal JSON traces,
-          hidden prompts, or the full private research environment. The goal is to make the results legible
-          without disclosing the full internal implementation stack.
+          This public site includes selected audit cases, summaries, findings, and method notes.
         </p>
-        <div class="grid three">
-          <div class="mini-card">
-            <h3>Execution</h3>
-            <p>Controlled prompts, benchmark sweeps, and adversarial runs.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Audit</h3>
-            <p>Reasoning, reflection, uncertainty, integrity, liability, and pressure response.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Evidence</h3>
-            <p>Comparative scorecards, summaries, charts, and exportable artifacts.</p>
-          </div>
-        </div>
+        <p>
+          It does not include the full private research environment, raw internal JSON traces, or the full internal implementation stack.
+        </p>
       </div>
     </section>
   </main>
