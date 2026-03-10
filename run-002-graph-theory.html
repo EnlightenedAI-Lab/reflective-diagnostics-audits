@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>L15 Diagnostic Run 002 — Graph Theory Oracle</title>
+  <meta name="description" content="Graph Theory Oracle case page from Reflective Diagnostics Audits." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header slim">
+    <div class="wrap">
+      <div class="eyebrow">Reflective Diagnostics Audits</div>
+      <h1>L15 Diagnostic Run 002</h1>
+      <p class="lead">Graph Theory Oracle — Relational Working Memory Under Adversarial Load</p>
+      <nav class="topnav">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="wrap">
+        <div class="run-strip">
+          <div><span>Date</span><strong>2026-03-10</strong></div>
+          <div><span>Module</span><strong>L15 Battery Runner</strong></div>
+          <div><span>Benchmark</span><strong>Graph Theory Oracle</strong></div>
+          <div><span>Setting</span><strong>Adversarial Batch Run</strong></div>
+        </div>
+
+        <h2>Hypothesis</h2>
+        <p>
+          Large context windows should not be confused with strong relational reasoning. A model may retain
+          large amounts of text while still failing when required to compute exact structure over dense graph
+          relationships. This run tests whether frontier models can reliably solve shortest-path problems under
+          adversarial graph complexity while also preserving output structure and calibrated confidence.
+        </p>
+
+        <h2>Run profile</h2>
+        <p>
+          This batch run evaluated five frontier models on twenty graph-theory adversarial items, for a total
+          of one hundred scored records. The overall result was mixed rather than catastrophic: <strong>47.0%
+          exact-answer accuracy</strong>, <strong>90.0% parse rate</strong>, and <strong>50.0% structural
+          decay</strong> across the batch. The run also recorded <strong>40 confident mistakes</strong> and an
+          overall <strong>arrogance score of 72.55</strong>.
+        </p>
+
+        <h2>Lane results</h2>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Accuracy</th>
+              <th>Parse</th>
+              <th>Structural Decay</th>
+              <th>Arrogance</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Claude Opus 4.6</td>
+              <td>65.0%</td>
+              <td>100.0%</td>
+              <td>60.0%</td>
+              <td>52.86</td>
+              <td>Strongest exact-answer lane in this batch</td>
+            </tr>
+            <tr>
+              <td>GPT-5.2</td>
+              <td>50.0%</td>
+              <td>100.0%</td>
+              <td>0.0%</td>
+              <td>97.5</td>
+              <td>Format-stable but highly overconfident when wrong</td>
+            </tr>
+            <tr>
+              <td>Gemini 2.5 Flash</td>
+              <td>50.0%</td>
+              <td>50.0%</td>
+              <td>90.0%</td>
+              <td>0.0</td>
+              <td>Low arrogance, but severe parse weakness and provider errors</td>
+            </tr>
+            <tr>
+              <td>Grok-3</td>
+              <td>40.0%</td>
+              <td>100.0%</td>
+              <td>0.0%</td>
+              <td>100.0</td>
+              <td>Perfect formatting, but extreme confidence failure</td>
+            </tr>
+            <tr>
+              <td>DeepSeek Chat</td>
+              <td>30.0%</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>92.86</td>
+              <td>Lowest accuracy with complete structural decay</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Core finding</h2>
+        <p>
+          This run does not support a total-collapse narrative. It shows something more useful: strong
+          separation between <strong>relational accuracy</strong>, <strong>format retention</strong>, and
+          <strong>epistemic posture</strong>.
+        </p>
+        <p>
+          Some models preserved format while remaining badly overconfident when wrong. Others lost structural
+          discipline under load. One lane stayed cautious but suffered severe parse weakness. The important
+          result is not only who scored highest. The more important result is that this batch exposed distinct
+          failure styles: format-stable overconfidence, structurally degraded reasoning, parse fragility, and
+          cautious partial success.
+        </p>
+
+        <h2>Why it matters</h2>
+        <p>
+          A standard benchmark would mostly reduce this run to answer accuracy. This case shows why that is
+          not enough. Two models can post similar scores while failing in very different ways. One can remain
+          perfectly formatted yet hallucinate confidently. Another can remain cautious but fail to complete
+          the task reliably. Another can solve a subset correctly while shedding structure under pressure.
+        </p>
+
+        <div class="note-box">
+          <strong>Bottom line:</strong> adversarial relational tasks remain a meaningful discriminator across
+          frontier models, especially when correctness, parse stability, structural discipline, and confidence
+          behavior are separated instead of collapsed into one score.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="index.html">Back to home</a></p>
+      <p>Enlightened AI Research Lab · <a href="mailto:research@enlightenedai.ai">research@enlightenedai.ai</a></p>
+    </div>
+  </footer>
+</body>
+</html>
