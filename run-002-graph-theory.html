@@ -12,7 +12,9 @@
     <div class="wrap">
       <div class="eyebrow">Reflective Diagnostics Audits</div>
       <h1>L15 Diagnostic Run 002</h1>
-      <p class="lead">Graph Theory Oracle — Relational Working Memory Under Adversarial Load</p>
+      <p class="lead">
+        Graph Theory Oracle — Can frontier models solve dense graph tasks without breaking structure or becoming overconfident?
+      </p>
       <nav class="topnav">
         <a href="index.html">Home</a>
       </nav>
@@ -29,24 +31,62 @@
           <div><span>Setting</span><strong>Adversarial Batch Run</strong></div>
         </div>
 
-        <h2>Hypothesis</h2>
+        <h2>What was tested</h2>
         <p>
-          Large context windows should not be confused with strong relational reasoning. A model may retain
-          large amounts of text while still failing when required to compute exact structure over dense graph
-          relationships. This run tests whether frontier models can reliably solve shortest-path problems under
-          adversarial graph complexity while also preserving output structure and calibrated confidence.
+          This run tested five frontier models on graph problems.
+        </p>
+        <p>
+          Each task asked for the exact shortest path distance between two nodes in a dense graph.
+        </p>
+        <p>
+          The point was not only to see who got the answer right. The point was also to see:
+        </p>
+        <ul>
+          <li>who stayed structured</li>
+          <li>who became overconfident</li>
+          <li>who broke under the task</li>
+        </ul>
+
+        <h2>Why this test matters</h2>
+        <p>
+          Many models advertise very large context windows.
+        </p>
+        <p>
+          But holding a lot of text is not the same as doing strong relational reasoning.
+          A model may keep a large prompt in memory and still fail when it has to track many connections exactly.
+        </p>
+        <p>
+          This test was built to check that difference.
         </p>
 
-        <h2>Run profile</h2>
+        <h2>Run setup</h2>
+        <ul>
+          <li><strong>Module:</strong> L15 Battery Runner</li>
+          <li><strong>Benchmark family:</strong> Graph Theory Oracle</li>
+          <li><strong>Models:</strong> GPT-5.2, Claude Opus 4.6, Gemini 2.5 Flash, DeepSeek Chat, Grok-3</li>
+          <li><strong>Batch size:</strong> 20 graph items per model</li>
+          <li><strong>Total records:</strong> 100</li>
+        </ul>
+
+        <h2>Overall result</h2>
         <p>
-          This batch run evaluated five frontier models on twenty graph-theory adversarial items, for a total
-          of one hundred scored records. The overall result was mixed rather than catastrophic: <strong>47.0%
-          exact-answer accuracy</strong>, <strong>90.0% parse rate</strong>, and <strong>50.0% structural
-          decay</strong> across the batch. The run also recorded <strong>40 confident mistakes</strong> and an
-          overall <strong>arrogance score of 72.55</strong>.
+          This was a difficult run.
+        </p>
+        <p>
+          Across the full batch, the result was:
+        </p>
+        <ul>
+          <li><strong>47.0% accuracy</strong></li>
+          <li><strong>90.0% parse rate</strong></li>
+          <li><strong>50.0% structural decay</strong></li>
+          <li><strong>40 confident mistakes</strong></li>
+        </ul>
+        <p>
+          So this was not a total collapse, but it was a strong stress test.
+          It clearly separated different failure styles.
         </p>
 
-        <h2>Lane results</h2>
+        <h2>Model-by-model result</h2>
         <table class="results-table">
           <thead>
             <tr>
@@ -55,7 +95,7 @@
               <th>Parse</th>
               <th>Structural Decay</th>
               <th>Arrogance</th>
-              <th>Notes</th>
+              <th>Main signal</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +105,7 @@
               <td>100.0%</td>
               <td>60.0%</td>
               <td>52.86</td>
-              <td>Strongest exact-answer lane in this batch</td>
+              <td>Best accuracy in this batch, but still lost structure often</td>
             </tr>
             <tr>
               <td>GPT-5.2</td>
@@ -73,7 +113,7 @@
               <td>100.0%</td>
               <td>0.0%</td>
               <td>97.5</td>
-              <td>Format-stable but highly overconfident when wrong</td>
+              <td>Stayed perfectly formatted, but was highly overconfident when wrong</td>
             </tr>
             <tr>
               <td>Gemini 2.5 Flash</td>
@@ -89,7 +129,7 @@
               <td>100.0%</td>
               <td>0.0%</td>
               <td>100.0</td>
-              <td>Perfect formatting, but extreme confidence failure</td>
+              <td>Perfect formatting, but extreme overconfidence on wrong answers</td>
             </tr>
             <tr>
               <td>DeepSeek Chat</td>
@@ -97,37 +137,51 @@
               <td>100.0%</td>
               <td>100.0%</td>
               <td>92.86</td>
-              <td>Lowest accuracy with complete structural decay</td>
+              <td>Lowest accuracy and complete structural decay</td>
             </tr>
           </tbody>
         </table>
 
-        <h2>Core finding</h2>
+        <h2>Main finding</h2>
         <p>
-          This run does not support a total-collapse narrative. It shows something more useful: strong
-          separation between <strong>relational accuracy</strong>, <strong>format retention</strong>, and
-          <strong>epistemic posture</strong>.
+          This run showed that three things can come apart:
+        </p>
+        <ul>
+          <li>answer accuracy</li>
+          <li>output structure</li>
+          <li>confidence behavior</li>
+        </ul>
+        <p>
+          A model can keep perfect format and still be confidently wrong.
         </p>
         <p>
-          Some models preserved format while remaining badly overconfident when wrong. Others lost structural
-          discipline under load. One lane stayed cautious but suffered severe parse weakness. The important
-          result is not only who scored highest. The more important result is that this batch exposed distinct
-          failure styles: format-stable overconfidence, structurally degraded reasoning, parse fragility, and
-          cautious partial success.
+          A model can stay cautious but fail to complete reliably.
+        </p>
+        <p>
+          A model can solve some tasks correctly but lose structure under load.
+        </p>
+        <p>
+          That is why this kind of audit is useful.
         </p>
 
-        <h2>Why it matters</h2>
+        <h2>Why this is better than a simple benchmark</h2>
         <p>
-          A standard benchmark would mostly reduce this run to answer accuracy. This case shows why that is
-          not enough. Two models can post similar scores while failing in very different ways. One can remain
-          perfectly formatted yet hallucinate confidently. Another can remain cautious but fail to complete
-          the task reliably. Another can solve a subset correctly while shedding structure under pressure.
+          A normal benchmark would mostly reduce this run to a score.
         </p>
+        <p>
+          This audit keeps more information:
+        </p>
+        <ul>
+          <li>who was correct</li>
+          <li>who stayed stable</li>
+          <li>who broke format</li>
+          <li>who became overconfident</li>
+          <li>who failed cautiously</li>
+        </ul>
 
         <div class="note-box">
-          <strong>Bottom line:</strong> adversarial relational tasks remain a meaningful discriminator across
-          frontier models, especially when correctness, parse stability, structural discipline, and confidence
-          behavior are separated instead of collapsed into one score.
+          <strong>Bottom line:</strong> dense graph reasoning remains a useful stress test for frontier models,
+          especially when correctness, structure, and confidence are measured separately.
         </div>
       </div>
     </section>
