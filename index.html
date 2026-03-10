@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reflective Diagnostics Audits</title>
+  <meta name="description" content="Public-facing audit cases and benchmark experiments from Enlightened AI Research Lab." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="eyebrow">Enlightened AI Research Lab</div>
+      <h1>Reflective Diagnostics Audits</h1>
+      <p class="lead">
+        Public-facing audit cases and benchmark experiments for evaluating structural reliability,
+        uncertainty, confidence behavior, and failure modes in large language models.
+      </p>
+      <nav class="topnav">
+        <a href="#about">About</a>
+        <a href="#cases">Cases</a>
+        <a href="#method">Method</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section">
+      <div class="wrap">
+        <h2>What this is</h2>
+        <p>
+          Reflective Diagnostics is a modular audit framework for evaluating not only what a model outputs,
+          but how stable it remains, how well its claims are supported, how it behaves under pressure,
+          and how it fails on exact-answer tasks.
+        </p>
+        <div class="grid two">
+          <div class="card">
+            <h3>What it measures</h3>
+            <ul>
+              <li>Structural support and reasoning quality</li>
+              <li>Revision behavior and drift</li>
+              <li>Uncertainty and semantic fragmentation</li>
+              <li>Confidence versus evidence density</li>
+              <li>Constraint grounding and integrity</li>
+              <li>Boundary hold, snap, and recovery under pressure</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Why it matters</h3>
+            <ul>
+              <li>Format-compliant but wrong</li>
+              <li>Correct but structurally unstable</li>
+              <li>High-confidence hallucination</li>
+              <li>Low-confidence failure</li>
+              <li>Semantic fragmentation across runs</li>
+              <li>Different failure styles hidden by ordinary benchmarks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases" class="section alt">
+      <div class="wrap">
+        <h2>Featured Audit Case</h2>
+        <div class="case-card">
+          <div class="case-meta">L15 Diagnostic Run 002 · 2026-03-10</div>
+          <h3>Graph Theory Oracle — Relational Working Memory Under Adversarial Load</h3>
+          <p>
+            Five frontier models were evaluated on adversarial shortest-path graph tasks designed to
+            separate relational accuracy, format retention, and epistemic posture.
+          </p>
+          <a class="button" href="run-002-graph-theory.html">Open case page</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="section">
+      <div class="wrap">
+        <h2>Method summary</h2>
+        <p>
+          This public site presents curated findings only. It does not expose raw internal JSON traces,
+          hidden prompts, or the full private research environment. The goal is to make the results legible
+          without disclosing the full internal implementation stack.
+        </p>
+        <div class="grid three">
+          <div class="mini-card">
+            <h3>Execution</h3>
+            <p>Controlled prompts, benchmark sweeps, and adversarial runs.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Audit</h3>
+            <p>Reasoning, reflection, uncertainty, integrity, liability, and pressure response.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Evidence</h3>
+            <p>Comparative scorecards, summaries, charts, and exportable artifacts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>Enlightened AI Research Lab</p>
+      <p><a href="mailto:research@enlightenedai.ai">research@enlightenedai.ai</a></p>
+    </div>
+  </footer>
+</body>
+</html>
