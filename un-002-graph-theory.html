@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>L15 Diagnostic Run 002 — Graph Theory Oracle</title>
+  <meta name="description" content="Graph Theory Oracle case page from Reflective Diagnostics Audits." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#eef3f7;
+      --panel:#ffffff;
+      --ink:#143f6b;
+      --ink-2:#34546f;
+      --muted:#657b8f;
+      --line:#d7e1ea;
+      --line-2:#c9d6e2;
+      --shadow:0 12px 28px rgba(19,63,107,.08);
+      --radius:18px;
+      --radius-sm:12px;
+      --good:#eaf6ef;
+      --good-ink:#1e6b3d;
+      --warn:#fff4e5;
+      --warn-ink:#8b5b11;
+      --bad:#fdecec;
+      --bad-ink:#8f2f2f;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:linear-gradient(180deg,#f3f7fb 0%, #ecf2f7 100%);
+      color:#17324a;
+      line-height:1.55;
+    }
+
+    .wrap{
+      width:min(1160px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    .hero{
+      padding:34px 0 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#f6f9fc 0%, #eff4f8 100%);
+    }
+
+    .eyebrow{
+      font-size:.82rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#2d5f8f;
+      margin-bottom:10px;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(2.9rem, 6vw, 5.4rem);
+      line-height:.98;
+      color:var(--ink);
+      letter-spacing:-.04em;
+      font-weight:800;
+    }
+
+    .lead{
+      max-width:980px;
+      font-size:clamp(1.05rem, 2vw, 1.6rem);
+      color:#5a7288;
+      margin:0;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:24px;
+      align-items:end;
+      margin-top:24px;
+    }
+
+    .summary-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 20px;
+    }
+
+    .summary-title{
+      margin:0 0 8px;
+      font-size:.78rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#64809b;
+      font-weight:800;
+    }
+
+    .summary-main{
+      margin:0;
+      font-size:1.05rem;
+      color:#214766;
+    }
+
+    .summary-main strong{
+      color:var(--ink);
+    }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+    }
+
+    .metric{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:16px 16px 14px;
+      min-height:108px;
+    }
+
+    .metric .label{
+      display:block;
+      font-size:.73rem;
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#68829a;
+      margin-bottom:10px;
+    }
+
+    .metric .value{
+      display:block;
+      font-size:2rem;
+      line-height:1;
+      font-weight:800;
+      color:var(--ink);
+      margin-bottom:8px;
+      letter-spacing:-.03em;
+    }
+
+    .metric .sub{
+      font-size:.92rem;
+      color:var(--muted);
+    }
+
+    .strip{
+      margin:18px 0 8px;
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .strip-card{
+      background:#f8fbfd;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px 16px;
+    }
+
+    .strip-card span{
+      display:block;
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#69829a;
+      margin-bottom:8px;
+    }
+
+    .strip-card strong{
+      color:var(--ink);
+      font-size:1.1rem;
+      letter-spacing:-.02em;
+    }
+
+    main{
+      padding:20px 0 40px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px 22px 20px;
+    }
+
+    h2{
+      margin:0 0 14px;
+      color:var(--ink);
+      font-size:clamp(1.45rem, 2vw, 2rem);
+      letter-spacing:-.03em;
+      line-height:1.05;
+    }
+
+    h3{
+      margin:0 0 12px;
+      color:var(--ink);
+      font-size:1.12rem;
+      letter-spacing:-.02em;
+    }
+
+    p{margin:0 0 12px}
+    ul{
+      margin:0;
+      padding-left:1.15rem;
+    }
+    li{margin:0 0 8px}
+
+    .compact p:last-child,
+    .compact ul:last-child{margin-bottom:0}
+
+    .takeaway{
+      background:linear-gradient(135deg,#163f6b 0%, #1c5c92 100%);
+      color:#fff;
+      border-radius:20px;
+      padding:18px 20px;
+      box-shadow:0 16px 34px rgba(20,63,107,.18);
+    }
+
+    .takeaway .title{
+      display:block;
+      font-size:.78rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      opacity:.85;
+      margin-bottom:8px;
+      font-weight:800;
+    }
+
+    .takeaway strong{
+      display:block;
+      font-size:1.16rem;
+      line-height:1.35;
+      font-weight:700;
+    }
+
+    .signal-list{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .signal{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px 15px;
+      background:#fbfdff;
+    }
+
+    .signal .k{
+      display:block;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:800;
+      color:#6d859b;
+      margin-bottom:5px;
+    }
+
+    .signal .v{
+      font-weight:700;
+      color:var(--ink);
+    }
+
+    .rank-cards{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .rank{
+      border-radius:16px;
+      padding:15px 15px 14px;
+      border:1px solid var(--line);
+      background:#fbfdff;
+    }
+
+    .rank.good{background:var(--good); color:var(--good-ink); border-color:#cfe8d7}
+    .rank.warn{background:var(--warn); color:var(--warn-ink); border-color:#f3debc}
+    .rank.bad{background:var(--bad); color:var(--bad-ink); border-color:#f1caca}
+
+    .rank .label{
+      display:block;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:800;
+      margin-bottom:8px;
+      opacity:.82;
+    }
+
+    .rank .headline{
+      display:block;
+      font-size:1.04rem;
+      line-height:1.25;
+      font-weight:800;
+      margin-bottom:5px;
+    }
+
+    .rank .detail{
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:900px;
+    }
+
+    thead th{
+      text-align:left;
+      font-size:.84rem;
+      color:#4f6f8c;
+      background:#eef4f9;
+      padding:14px 14px;
+      border-bottom:1px solid var(--line);
+      font-weight:800;
+    }
+
+    tbody td{
+      padding:14px 14px;
+      border-bottom:1px solid #e7eef4;
+      vertical-align:top;
+      font-size:.96rem;
+    }
+
+    tbody tr:nth-child(even){
+      background:#fbfdff;
+    }
+
+    tbody tr:hover{
+      background:#f4f9fd;
+    }
+
+    .num{
+      font-weight:800;
+      color:var(--ink);
+      white-space:nowrap;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:.76rem;
+      font-weight:800;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+
+    .b-good{background:var(--good); color:var(--good-ink)}
+    .b-warn{background:var(--warn); color:var(--warn-ink)}
+    .b-bad{background:var(--bad); color:var(--bad-ink)}
+    .b-neutral{background:#edf3f8; color:#43617d}
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .example{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fbfdff;
+      padding:16px;
+    }
+
+    .example .title{
+      display:block;
+      font-weight:800;
+      color:var(--ink);
+      margin-bottom:8px;
+    }
+
+    .example code{
+      background:#eef4f9;
+      color:#1c4468;
+      border-radius:8px;
+      padding:2px 6px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.9em;
+    }
+
+    .footer{
+      padding:22px 0 30px;
+      color:#5c7388;
+      font-size:.95rem;
+      text-align:center;
+    }
+
+    .footer a{
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .grid{
+        grid-template-columns:1fr;
+      }
+      .strip{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .rank-cards{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .wrap{width:min(100% - 24px, 1160px)}
+      .hero{padding-top:24px}
+      .strip,
+      .hero-metrics,
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+      .panel{padding:18px 16px}
+      .metric{min-height:auto}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Reflective Diagnostics Audits</div>
+      <h1>L15 Diagnostic Run 002</h1>
+      <p class="lead">
+        Graph Theory Oracle — Can frontier models solve dense graph tasks without breaking structure or becoming overconfident?
+      </p>
+
+      <div class="hero-grid">
+        <div class="summary-card">
+          <div class="summary-title">At a glance</div>
+          <p class="summary-main">
+            This run separated three different failure styles: <strong>wrong answers</strong>,
+            <strong>structural breakdown</strong>, and <strong>confident mistakes</strong>.
+          </p>
+          <div class="rank-cards">
+            <div class="rank good">
+              <span class="label">Best Accuracy</span>
+              <span class="headline">Claude Opus 4.6</span>
+              <div class="detail">65.0% accuracy, but still 60.0% structural decay.</div>
+            </div>
+            <div class="rank warn">
+              <span class="label">Most Stable Format</span>
+              <span class="headline">GPT-5.2</span>
+              <div class="detail">0.0% structural decay, but 97.5 arrogance score.</div>
+            </div>
+            <div class="rank bad">
+              <span class="label">Most Overconfident</span>
+              <span class="headline">Grok-3</span>
+              <div class="detail">100.0 arrogance with only 40.0% accuracy.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <span class="label">Overall Accuracy</span>
+            <span class="value">47.0%</span>
+            <span class="sub">47 correct out of 100 records</span>
+          </div>
+          <div class="metric">
+            <span class="label">Parse Rate</span>
+            <span class="value">90.0%</span>
+            <span class="sub">10 parse failures in one lane</span>
+          </div>
+          <div class="metric">
+            <span class="label">Structural Decay</span>
+            <span class="value">50.0%</span>
+            <span class="sub">Structure frequently separated from correctness</span>
+          </div>
+          <div class="metric">
+            <span class="label">Confident Mistakes</span>
+            <span class="value">40</span>
+            <span class="sub">High-confidence wrong answers across the batch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="strip-card"><span>Date</span><strong>2026-03-10</strong></div>
+        <div class="strip-card"><span>Module</span><strong>L15 Battery Runner</strong></div>
+        <div class="strip-card"><span>Benchmark</span><strong>Graph Theory Oracle</strong></div>
+        <div class="strip-card"><span>Setting</span><strong>Adversarial Batch Run</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap" style="margin-top:22px;">
+      <div class="grid">
+        <section class="panel compact">
+          <h2>What was tested</h2>
+          <p>
+            Five frontier models were tested on dense graph shortest-path tasks. Each item required
+            the exact shortest path distance between two nodes.
+          </p>
+          <p>
+            This audit was designed to measure more than final accuracy. It also measured whether models
+            stayed structured, became overconfident, or failed under relational load.
+          </p>
+
+          <div class="takeaway" style="margin-top:16px;">
+            <span class="title">Key result</span>
+            <strong>
+              Large context does not guarantee strong relational reasoning. This run exposed sharp differences
+              between accuracy, formatting stability, and confidence behavior.
+            </strong>
+          </div>
+
+          <div class="signal-list">
+            <div class="signal">
+              <span class="k">Why this matters</span>
+              <div class="v">A model can look stable and still be confidently wrong.</div>
+            </div>
+            <div class="signal">
+              <span class="k">Run scope</span>
+              <div class="v">5 models · 20 graph items each · 100 total records.</div>
+            </div>
+            <div class="signal">
+              <span class="k">Audit advantage</span>
+              <div class="v">This separates correctness, structure, and confidence instead of collapsing everything into one score.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel compact">
+          <h2>Run setup</h2>
+          <ul>
+            <li><strong>Module:</strong> L15 Battery Runner</li>
+            <li><strong>Benchmark family:</strong> Graph Theory Oracle</li>
+            <li><strong>Models:</strong> GPT-5.2, Claude Opus 4.6, Gemini 2.5 Flash, DeepSeek Chat, Grok-3</li>
+            <li><strong>Batch size:</strong> 20 graph items per model</li>
+            <li><strong>Total records:</strong> 100</li>
+          </ul>
+
+          <h2 style="margin-top:22px;">Overall interpretation</h2>
+          <p>
+            This was a difficult batch, but not a total collapse. The run clearly separated different
+            model failure styles.
+          </p>
+          <ul>
+            <li><strong>Claude Opus 4.6</strong> led accuracy.</li>
+            <li><strong>GPT-5.2</strong> stayed perfectly formatted but was highly overconfident when wrong.</li>
+            <li><strong>Gemini 2.5 Flash</strong> showed severe parse weakness and provider errors.</li>
+            <li><strong>Grok-3</strong> was the most overconfident lane.</li>
+            <li><strong>DeepSeek Chat</strong> had the weakest overall profile.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="panel" style="margin-top:22px;">
+        <h2>Ranked model comparison</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>Parse</th>
+                <th>Structural Decay</th>
+                <th>Arrogance</th>
+                <th>Main signal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Claude Opus 4.6</strong><br><span class="badge b-good">Highest accuracy</span></td>
+                <td class="num">65.0%</td>
+                <td class="num">100.0%</td>
+                <td class="num">60.0%</td>
+                <td class="num">52.86</td>
+                <td>Best accuracy in this batch, but still lost structure often.</td>
+              </tr>
+              <tr>
+                <td><strong>GPT-5.2</strong><br><span class="badge b-neutral">Most stable format</span></td>
+                <td class="num">50.0%</td>
+                <td class="num">100.0%</td>
+                <td class="num">0.0%</td>
+                <td class="num">97.5</td>
+                <td>Stayed perfectly formatted, but was highly overconfident when wrong.</td>
+              </tr>
+              <tr>
+                <td><strong>Gemini 2.5 Flash</strong><br><span class="badge b-warn">Parsing weakness</span></td>
+                <td class="num">50.0%</td>
+                <td class="num">50.0%</td>
+                <td class="num">90.0%</td>
+                <td class="num">0.0</td>
+                <td>Low arrogance, but severe parse weakness and provider errors.</td>
+              </tr>
+              <tr>
+                <td><strong>Grok-3</strong><br><span class="badge b-bad">Extreme overconfidence</span></td>
+                <td class="num">40.0%</td>
+                <td class="num">100.0%</td>
+                <td class="num">0.0%</td>
+                <td class="num">100.0</td>
+                <td>Perfect formatting, but extreme overconfidence on wrong answers.</td>
+              </tr>
+              <tr>
+                <td><strong>DeepSeek Chat</strong><br><span class="badge b-bad">Weakest overall</span></td>
+                <td class="num">30.0%</td>
+                <td class="num">100.0%</td>
+                <td class="num">100.0%</td>
+                <td class="num">92.86</td>
+                <td>Lowest accuracy and complete structural decay.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:22px;">
+        <h2>Notable failure patterns</h2>
+        <div class="mini-grid">
+          <div class="example">
+            <span class="title">Confidently wrong</span>
+            <p>
+              GPT-5.2 and Grok-3 both preserved format, but their confidence behavior made wrong answers
+              more dangerous rather than less.
+            </p>
+            <p><strong>Signal:</strong> strong structure does not equal trustworthy reasoning.</p>
+          </div>
+
+          <div class="example">
+            <span class="title">Cautious but incomplete</span>
+            <p>
+              Gemini 2.5 Flash showed low arrogance, but the lane suffered from parse failures and provider errors.
+            </p>
+            <p><strong>Signal:</strong> caution alone does not create reliable completion.</p>
+          </div>
+
+          <div class="example">
+            <span class="title">Accuracy without structural resilience</span>
+            <p>
+              Claude Opus 4.6 led the batch on accuracy, yet still showed 60.0% structural decay.
+            </p>
+            <p><strong>Signal:</strong> better answers do not automatically mean stable behavior under load.</p>
+          </div>
+
+          <div class="example">
+            <span class="title">Full breakdown profile</span>
+            <p>
+              DeepSeek Chat combined the lowest accuracy with complete structural decay and a very high arrogance score.
+            </p>
+            <p><strong>Signal:</strong> this was the clearest weak profile in the batch.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel compact" style="margin-top:22px;">
+        <h2>Why this is better than a simple benchmark</h2>
+        <p>
+          A normal benchmark would mostly reduce this run to a score. This audit preserves more useful
+          evidence: who was correct, who stayed stable, who broke format, who became overconfident, and
+          who failed cautiously.
+        </p>
+        <div class="takeaway" style="margin-top:16px;">
+          <span class="title">Bottom line</span>
+          <strong>
+            Dense graph reasoning remains a useful stress test for frontier models, especially when correctness,
+            structure, and confidence are measured separately.
+          </strong>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Enlightened AI Research Lab · <a href="mailto:research@enlightenedai.ai">research@enlightenedai.ai</a>
+  </footer>
+</body>
+</html>
